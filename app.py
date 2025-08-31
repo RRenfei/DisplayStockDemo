@@ -41,7 +41,7 @@ if shortname and symbol:
     data_getter = GetProcessedCSMARData(freq="weekly")
 
     # 优先按股票代码取数
-    df = data_getter.price(query.strip())
+    df = data_getter.price(symbol)
 
     if df.empty:
         st.warning("未找到该股票的数据。")

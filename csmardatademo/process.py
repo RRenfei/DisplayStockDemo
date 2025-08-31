@@ -5,13 +5,11 @@ from tqdm import tqdm
 from tables import NaturalNameWarning
 import warnings
 
-from csmardatademo.config import DATA_DATE_STR
-
 warnings.filterwarnings("ignore", category=NaturalNameWarning)
 
 # 当前文件夹路径和数据所在文件夹的绝对路径
 base_dir = os.path.dirname(os.path.abspath(__file__))
-data_dir = os.path.join(base_dir, "data", str(DATA_DATE_STR))
+data_dir = os.path.join(base_dir, "data")
 
 PRICE_FIELD_MAPPING = {
     "TradingDate": {"rename": "trading_date", "dtype": "datetime64[ns]"},
@@ -49,7 +47,7 @@ def save_as_hdf():
 
     # 按个股以此将日频数据保存至同路径的hdf文件
     symbols = df["symbol"].unique().tolist()
-    hdf_name = f"{DATA_DATE_STR}.hdf"
+    hdf_name = f"daily_price.hdf"
 
     with pd.HDFStore(os.path.join(data_dir, hdf_name), mode='w') as store:
         for symbol in tqdm(symbols, desc=f"正在按个股保存数据至{hdf_name}"):
@@ -63,8 +61,8 @@ class CSMARDataProcessor:
 
         present2_dir = os.path.dirname(os.path.dirname(base_dir))  # 上两级目录
 
-        self.daily_hdf = os.path.join(data_dir, f"{DATA_DATE_STR}.hdf")
-        self.weekly_hdf = os.path.join(data_dir, f"{DATA_DATE_STR}_week.hdf")
+        self.daily_hdf = os.path.join(data_dir, f"daily_price.hdf")
+        self.weekly_hdf = os.path.join(data_dir, f"weekly_price.hdf")
         self.shortname_symbol_json = os.path.join(present2_dir, "shortname_symbol.json")
 
     def derive_weekly_prices(self):
