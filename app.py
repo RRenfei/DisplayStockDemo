@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 from csmardatademo.get_data import GetProcessedCSMARData
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-shortname_symbol_json = os.path.join(base_dir, "csmardatademo\\shortname_symbol.json")
+shortname_symbol_json = os.path.join(base_dir, "csmardatademo", "shortname_symbol.json")
 with open(shortname_symbol_json, "r", encoding="utf-8") as f:
     shortname_symbol_dict = json.load(f)
 symbol_shortname_dict = {v: k for k, v in shortname_symbol_dict.items()}
