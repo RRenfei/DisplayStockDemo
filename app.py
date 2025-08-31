@@ -13,7 +13,7 @@ with open(shortname_symbol_json, "r", encoding="utf-8") as f:
 symbol_shortname_dict = {v: k for k, v in shortname_symbol_dict.items()}
 
 st.set_page_config(
-    page_title="股票数据展示demo",
+    page_title="原神，启动！",
     layout="wide"
 )
 
